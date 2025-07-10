@@ -15,7 +15,7 @@ function convertvalue() {
         currencyConverter.innerHTML = new Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD"
-        }).format(inputCurrencyValue/dolarToday)
+        }).format(inputCurrencyValue / dolarToday)
     }
 
     if (currencySelect.value === "euro") {
@@ -23,16 +23,29 @@ function convertvalue() {
         currencyConverter.innerHTML = new Intl.NumberFormat("de-DE", {
             style: "currency",
             currency: "EUR"
-        }).format(inputCurrencyValue/euroToday)
+        }).format(inputCurrencyValue / euroToday)
     }
+
+    // Atualiza o valor em real sempre que converter
+    currencyValueToConvert.innerHTML = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    }).format(inputCurrencyValue)
 }
 
-currencyValueToConvert.innerHTML = new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL"
-}).format(inputCurrencyValue)
-
-console.log(converterValue);
-
+function changeCurrency() {
+    const currencyName = document.getElementById('currency-name')
+    const currencyImage = document.querySelector('.currency-img');
+if (currencySelect.value === "dolar"){
+    currencyName.innerHTML = 'Dólar americano'
+    currencyImage.src = './assets/USA.png'
+}
+if (currencySelect.value === "euro"){
+    currencyName.innerHTML = 'Euro'
+     currencyImage.src = './assets/Euro.png'
+}
+convertvalue() 
+}
+currencySelect.addEventListener("change", changeCurrency);
 converterButton.addEventListener("click", convertvalue);
 
